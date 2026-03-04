@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+	<!-- BEGIN login -->
+	<div class="login">
+		<!-- BEGIN login-content -->
+		<div class="login-content">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger py-2 fs-12px">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+			<form action="{% url 'DjangoHUDApp:login' %}" method="POST">
+                {% csrf_token %}
+				<h1 class="text-center">Sign In</h1>
+				<div class="text-inverse text-opacity-50 text-center mb-4">
+					For your protection, please verify your identity.
+				</div>
+				<div class="mb-3">
+					<label class="form-label fs-12px fw-bold text-uppercase">Username</label>
+                    <input type="text" name="username" class="form-control form-control-lg rounded-pill fs-14px" placeholder="Enter username" required>
+				</div>
+				<div class="mb-3">
+					<div class="d-flex">
+						<label class="form-label">Password <span class="text-danger">*</span></label>
+						<a href="#" class="ms-auto text-inverse text-decoration-none text-opacity-50">Forgot password?</a>
+					</div>
+					<input type="password" name="password" class="form-control form-control-lg rounded-pill fs-14px" placeholder="••••••••" required>
+				</div>
+				<div class="mb-3">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="rememberMe">
+						<label class="form-check-label" for="rememberMe">Remember me</label>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-outline-theme btn-lg d-block w-100 fw-500 mb-3">Sign In</button>
+				<div class="text-center text-inverse text-opacity-50">
+					Don't have an account yet? <a href="{% url 'DjangoHUDApp:pageRegister' %}">Sign up</a>.
+				</div>
+			</form>
+		</div>
+		<!-- END login-content -->
+	</div>
+	<!-- END login -->
+{% endblock %}
